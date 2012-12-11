@@ -1,3 +1,24 @@
+*Public Beta*
+	
+This software is in public beta. It reuses the native exp:channel:entries loop, so it's already really stable. Still, don't use it on any projects that have looming deadlines and expect me to immediately fix things for you if they break. Otherwise, I need all hands on deck for testing and giving me feedback.
+
+### Overview
+
+Entries brings a collection of tags that make working with the Channel Entries much more advanced. Entries is designed to work in conjunction with the regular channl entries tag, replace it entirely.
+
+---
+
+### The Design
+
+Entries was designed to have a modular and expressive syntax. The idea is add new methods overtime and have a robust library that is easy to remember, and completely reuses the exp:channel:entries tag.
+
+##### So why is the name *Entries*, which is not to be confused with *Channel Entries*?
+
+It just seemed to fit. The idea was to create a tag with really short and memorable syntax. A tag without underscores in the second segment, and *Entries* is short for *Channel Entries*, which is engine that powers everything.
+
+
+---
+
 ## assigned_to_member()
 	
 This method allows you store a delimited string of member_id's in a channel field that can be used to grab "assigned" entries. An assigned entry conists of any entry authored by the given user, or any entry in which the defined field contains a member_id.
