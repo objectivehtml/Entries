@@ -17,11 +17,11 @@ Entries brings a collection of tags that make working with the Channel Entries m
 
 ### The Design
 
-Entries was designed to have a modular and expressive syntax. The idea is add new methods overtime and have a robust library that is easy to remember, and completely reuses the exp:channel:entries tag.
+Entries was designed to have a modular and expressive syntax. The idea is to add new methods over time, and have a robust library that is easy to remember which completely reuses the exp:channel:entries tag.
 
 ##### So why is the name *Entries*, which is not to be confused with *Channel Entries*?
 
-It just seemed to fit. The idea was to create a tag with really short and memorable syntax. A tag without underscores in the second segment, and *Entries* is short for *Channel Entries*, which is engine that powers everything.
+It just seemed to fit. The idea was to create a tag with really short and memorable syntax. A tag without underscores in the second segment, and *Entries* is short for *Channel Entries*, which is the engine that powers everything.
 
 
 
