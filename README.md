@@ -13,7 +13,7 @@ This software is in public beta. It reuses the native exp:channel:entries loop, 
 
 Entries brings a collection of tags that make working with the Channel Entries much more advanced. Entries is designed to work in conjunction with the regular channl entries tag, replace it entirely.
 
----
+
 
 ### The Design
 
@@ -24,7 +24,7 @@ Entries was designed to have a modular and expressive syntax. The idea is add ne
 It just seemed to fit. The idea was to create a tag with really short and memorable syntax. A tag without underscores in the second segment, and *Entries* is short for *Channel Entries*, which is engine that powers everything.
 
 
----
+
 
 ## assigned_to_member()
 	
@@ -48,7 +48,7 @@ from_author_id : The default value is the member that is logged in, but use this
 - ids_assigned_to_member();
 - ids_assigned_to_me();
 	
----
+
 
 ## assigned_to_me()
 	
@@ -70,7 +70,7 @@ from_channel : This is the channel that can be defined that contains the field t
 - ids_assigned_to_member();
 - ids_assigned_to_me();
 	
----
+
 
 ## ids_assigned_to_member()
 	
@@ -90,7 +90,7 @@ from_author_id : The default value is the member that is logged in, but use this
 - assigned_to_member
 - assigned_to_me();
 	
----
+
 
 ## ids_assigned_to_me()
 	
@@ -110,7 +110,7 @@ from_channel : This is the channel that can be defined that contains the field t
 - assigned_to_member
 - assigned_to_me();
 
----
+
 
 ## get()
 	
@@ -158,7 +158,7 @@ This method is simply an alias to exp:channel:entries. This big difference here 
 
 *Numbered prefixes are used to represent nested depth, you can use whatever you prefer. It's also importan to be mindful of performance. Test your code thoroughly when using nested tags.*
 
----
+
 
 ## by_category()
 	
@@ -180,7 +180,7 @@ Specify one or category parent id's using a '|' delimiter.
 
 *All parameters from the exp:channel:entries are accepted.*
 
----
+
 
 ## profile()
 	
@@ -190,7 +190,7 @@ This method assumes a member profile is stored as a channel entry, and by defaul
 
 *All parameters from the exp:channel:entries are accepted.*
 		
----
+
 
 ## my_category_entries()
 	
@@ -200,7 +200,7 @@ This method uses the exp:entries:profile tag as a base, but rather than return t
 
 *All parameters from the exp:channel:entries are accepted.*
 
----
+
 
 ## my_category_ids()
 	
@@ -210,7 +210,7 @@ This method uses the exp:entries:profile tag as a base, but rather than parse ta
 
 *All parameters from the exp:channel:entries are accepted.*
 		
----
+
 
 ## related()
 	
@@ -223,7 +223,7 @@ This is the entry from which you wish to use to grab other related entries. So i
 
 *All parameters from the exp:channel:entries are accepted.*
 		
----
+
 
 ## reverse_related()
 	
