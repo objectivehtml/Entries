@@ -1,4 +1,11 @@
-*Public Beta*
+Entries
+============
+
+### Version 0.9.0 - 20121210
+
+#### By Justin Kimbrell / Objective HTML
+
+### *Public Beta*
 	
 This software is in public beta. It reuses the native exp:channel:entries loop, so it's already really stable. Still, don't use it on any projects that have looming deadlines and expect me to immediately fix things for you if they break. Otherwise, I need all hands on deck for testing and giving me feedback.
 
