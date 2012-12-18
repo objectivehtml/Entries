@@ -63,6 +63,58 @@ class Entries {
 		return $this->assigned_to_member();
 	}
 	
+	public function by_field()
+	{
+		$fields = $this->EE->channel_data->utility->reindex($this->EE->channel_data->get_fields()->result_array(), 'field_name');
+		
+		$where = array();
+			
+		foreach($this->lib->get_params() as $index => $value)
+		{
+			if($channel = $this->param('channel'))
+			{
+				$channel = $this->EE->channel_data->get_channel_by_name($channel);
+				
+				if($channel->num_rows() == 1)
+				{
+					$channel = $channel->row('channel_id');
+				}
+			}
+			
+			if(preg_match('/^field:/', $index))
+			{
+				$index = preg_replace('/^field:/', '', $index);
+				
+				if(isset($fields[$index]))
+				{
+					$index = 'field_id_'.$fields[$index]['field_id'];
+				}
+				
+				$where[$index] = $value;
+			}
+		}
+		
+		$entries = $this->EE->channel_data->get_channel_entries($channel, array(
+			'where' => $where
+		));
+		
+		if($entries->num_rows() == 0)
+		{
+			return $this->EE->TMPL->no_results();
+		}
+		
+		$entry_ids = array();
+		
+		foreach($entries->result() as $entry)
+		{
+			$entry_ids[] = $entry->entry_id;	
+		}
+		
+		return $this->lib->entries(array(
+			'entry_id' => implode('|', $entry_ids)
+		));	
+	}
+	
 	public function ids_assigned_to_member()
 	{
 		$channel = $this->param('channel', FALSE, FALSE, TRUE);

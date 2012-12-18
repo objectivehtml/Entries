@@ -172,6 +172,8 @@ class Channel_data_tmpl extends Channel_data_lib {
 		
 		$TMPL = $this->EE->channel_data->tmpl->create_alias($tagdata);
 		
+		$this->EE->TMPL->template = $this->EE->functions->prep_conditionals($this->EE->TMPL->template, $entry_data);
+		
 		$this->EE->TMPL->template = $this->EE->TMPL->parse_variables($this->EE->TMPL->template, $parse_vars);
 		
 		$this->EE->TMPL->template = $this->parse_fieldtypes($entry_data, $channels, $channel_fields, $this->EE->TMPL->template, $prefix, $index);	

@@ -44,6 +44,15 @@ class Entries_upd {
 		$this->EE->data_forge = new Data_forge();
 		$this->EE->data_forge->update_tables($this->tables);
 
+		$data = array(
+	        'module_name' => $this->mod_name,
+	        'module_version' => $this->version,
+	        'has_cp_backend' => 'y',
+	        'has_publish_fields' => 'n'
+	    );
+	    	
+	    $this->EE->db->insert('modules', $data);
+	    
 		foreach($this->actions as $action)
 		{
 			$this->EE->db->where(array(
