@@ -174,6 +174,8 @@ class Entries_lib {
 	
 	public function entries($params = array(), $channel = FALSE)
 	{
+		$tagdata = $this->get_tagdata();
+		
 		$this->set_params($params);
 		
 		if($channel)
@@ -186,16 +188,8 @@ class Entries_lib {
 		}
 		
 		if($prefix = $this->get_param('prefix'))
-		{
-		
+		{		
 			$this->set_tagdata(preg_replace('/(('.LD.'|\/)|(|if)\s)'.$prefix.'\d*/', '$1', $this->get_tagdata()));
-			
-			if(preg_match('/\\'.LD.'if '.$prefix.'no_results\\'.RD.'.*\\'.LD.'\\/if\\'.RD.'/us', $this->get_tagdata(), $matches))
-			{
-				$this->EE->TMPL->no_results = $this->EE->TMPL->parse_variables_row($matches[0], array(
-					$prefix.'no_results' => 1
-				));
-			}
 			
 			foreach($this->EE->TMPL->var_single as $index => $value)
 			{
@@ -215,12 +209,25 @@ class Entries_lib {
 			foreach($this->EE->TMPL->tag_data as $index => $tag_data)
 			{
 				$block   = $tag_data['block'];
-				$this->EE->TMPL->tag_data[$index]['chunk'] = str_replace($block, $tagdata, $tag_data['chunk']);
-				$this->EE->TMPL->tag_data[$index]['block'] = $tagdata;
+				//$this->EE->TMPL->tag_data[$index]['chunk'] = str_replace($block, $tagdata, $tag_data['chunk']);
+				//$this->EE->TMPL->tag_data[$index]['block'] = $tagdata;
 			}
+			
+			if(preg_match('/\\'.LD.'if no_results\\'.RD.'.*\\'.LD.'\\/if\\'.RD.'/us', $this->get_tagdata(), $matches))
+			{
+				$this->EE->TMPL->no_results = $this->EE->TMPL->parse_variables_row($matches[0], array(
+					'no_results' => 1
+				));
+				
+			}
+			
 		}	 
 				
-		return trim($this->channel->entries());
+		$entries = trim($this->channel->entries());
+		
+		$this->set_tagdata($tagdata);
+		
+		return $entries;
 	}
 	
 }
