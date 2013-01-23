@@ -77,10 +77,9 @@ class Entries_lib {
 					unset($this->EE->TMPL->tagparams[$param]);
 				}
 			}
-
 		}
 		else
-		{
+		{			
 			$this->EE->TMPL->tagparams = FALSE;
 		}
 	}
@@ -173,7 +172,26 @@ class Entries_lib {
 	}
 	
 	public function entries($params = array(), $channel = FALSE)
-	{
+	{	
+		$default_params = array(
+			'dynamic' => 'no',
+			'disable' => 'member_data|categories|category_fields|pagination'
+		);
+		
+		foreach($default_params as $param => $value)
+		{
+			$user_param = $this->get_param($param);
+			
+			if($user_param)
+			{
+				$params[$param] = $user_param;
+			}
+			else
+			{
+				$params[$param] = $value;
+			}
+		}
+		
 		$tagdata = $this->get_tagdata();
 		
 		$this->set_params($params);

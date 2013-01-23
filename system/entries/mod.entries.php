@@ -68,29 +68,33 @@ class Entries {
 		$fields = $this->EE->channel_data->utility->reindex($this->EE->channel_data->get_fields()->result_array(), 'field_name');
 		
 		$where = array();
-			
-		foreach($this->lib->get_params() as $index => $value)
+		
+		
+		if($channel = $this->param('channel'))
 		{
-			if($channel = $this->param('channel'))
-			{
-				$channel = $this->EE->channel_data->get_channel_by_name($channel);
-				
-				if($channel->num_rows() == 1)
-				{
-					$channel = $channel->row('channel_id');
-				}
-			}
+			$channel = $this->EE->channel_data->get_channel_by_name($channel);
 			
-			if(preg_match('/^field:/', $index))
+			if($channel->num_rows() == 1)
 			{
-				$index = preg_replace('/^field:/', '', $index);
-				
-				if(isset($fields[$index]))
+				$channel = $channel->row('channel_id');
+			}
+		}
+		
+		if($params = $this->lib->get_params())
+		{			
+			foreach($params as $index => $value)
+			{
+				if(preg_match('/^field:/', $index))
 				{
-					$index = 'field_id_'.$fields[$index]['field_id'];
+					$index = preg_replace('/^field:/', '', $index);
+					
+					if(isset($fields[$index]))
+					{
+						$index = 'field_id_'.$fields[$index]['field_id'];
+					}
+					
+					$where[$index] = $value;
 				}
-				
-				$where[$index] = $value;
 			}
 		}
 		
@@ -117,9 +121,21 @@ class Entries {
 	
 	public function by_author()
 	{
+		$channel = FALSE;
+
+		if($channel = $this->param('channel'))
+		{
+			$channel = $this->EE->channel_data->get_channel_by_name($channel);
+			
+			if($channel->num_rows() == 1)
+			{
+				$channel = $channel->row('channel_id');
+			}
+		}
+				
 		$entries = $this->EE->channel_data->get_channel_entries($channel, array(
 			'where' => array(
-				'author_id' => $this->param('author_id')
+				'author_id' => $this->param('author_id', FALSE, FALSE, TRUE)
 			)
 		));
 		
@@ -134,8 +150,6 @@ class Entries {
 		{
 			$entry_ids[] = $entry->entry_id;	
 		}
-		
-		var_dump($entry_ids);exit();
 		
 		return $this->lib->entries(array(
 			'entry_id' => implode('|', $entry_ids)
