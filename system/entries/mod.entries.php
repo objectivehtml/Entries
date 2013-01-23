@@ -115,6 +115,33 @@ class Entries {
 		));	
 	}
 	
+	public function by_author()
+	{
+		$entries = $this->EE->channel_data->get_channel_entries($channel, array(
+			'where' => array(
+				'author_id' => $this->param('author_id')
+			)
+		));
+		
+		if($entries->num_rows() == 0)
+		{
+			return $this->EE->TMPL->no_results();
+		}
+		
+		$entry_ids = array();
+		
+		foreach($entries->result() as $entry)
+		{
+			$entry_ids[] = $entry->entry_id;	
+		}
+		
+		var_dump($entry_ids);exit();
+		
+		return $this->lib->entries(array(
+			'entry_id' => implode('|', $entry_ids)
+		));
+	}
+	
 	public function ids_assigned_to_member()
 	{
 		$channel = $this->param('channel', FALSE, FALSE, TRUE);
