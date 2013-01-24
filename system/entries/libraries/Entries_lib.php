@@ -178,6 +178,14 @@ class Entries_lib {
 			'disable' => 'member_data|categories|category_fields|pagination'
 		);
 		
+		if($enable = $this->get_param('enable'))
+		{
+			$enable = explode('|', $enable);
+			
+			
+			$default_params['disable'] = str_replace($enable, '', $default_params['disable']);
+		}
+		
 		foreach($default_params as $param => $value)
 		{
 			$user_param = $this->get_param($param);
@@ -236,13 +244,12 @@ class Entries_lib {
 				$this->EE->TMPL->no_results = $this->EE->TMPL->parse_variables_row($matches[0], array(
 					'no_results' => 1
 				));
-				
 			}
 			
 		}	 
-				
-		$entries = trim($this->channel->entries());
 		
+		$entries = trim($this->channel->entries());
+			
 		$this->set_tagdata($tagdata);
 		
 		return $entries;

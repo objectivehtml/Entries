@@ -226,12 +226,12 @@ class Entries {
 			$this->lib->reset_params();
 		}
 		
-		$params = array(
+		$params = array_merge(array(
 			'channel'   => $this->param('channel', 'members'),
 			'author_id' => $this->param('author_id', 'CURRENT_USER'),
 			'limit'     => $this->param('limit', 1),
 			'dynamic'   => $this->param('dynamic', 'no')
-		);
+		), $override);
 		
 		$this->lib->set_params($params);
 		
@@ -293,9 +293,9 @@ class Entries {
 		$params = array(
 			'channel'  => $this->param('channel'),
 			'entry_id' => implode($entry_ids, '|'),
-			'dynamic'  => 'no',
-			'orderby'  => 'start',
-			'disable'  => 'disable="member_data|categories|category_fields|pagination"'
+			'dynamic'  => $this->param('dynamic', 'no'),
+			'orderby'  => $this->param('orderby', 'entry_date'),
+			'disable'  => $this->param('disabled', 'member_data|categories|category_fields|pagination')
 		);
 		
 		$this->lib->set_params($params);
@@ -311,6 +311,8 @@ class Entries {
 		$this->lib->set_tagdata('{category_ids}');
 		
 		$category = $this->_fetch_category_ids();
+		
+		$override['disable'] = $this->param('disable', 'member_data|category_fields|pagination');
 		
 		if($category)
 		{
@@ -330,8 +332,8 @@ class Entries {
 	public function my_category_entries()
 	{	
 		$category_ids = $this->my_category_ids();
-			
-		$this->lib->set_param('dynamic', $this->param('dynamic', 'no'));
+		
+		$this->lib->set_param('enable', $this->param('enable', 'categories'));
 		
 		return $this->lib->entries(array(
 			'category' => $category_ids
