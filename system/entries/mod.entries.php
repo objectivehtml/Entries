@@ -230,7 +230,7 @@ class Entries {
 			'channel'   => $this->param('channel', 'members'),
 			'author_id' => $this->param('author_id', 'CURRENT_USER'),
 			'limit'     => $this->param('limit', 1),
-			'dynamic'   => $this->param('dynamic', 'no')
+			'dynamic'   => $this->param('dynamic', 'no'),
 		), $override);
 		
 		$this->lib->set_params($params);
@@ -308,10 +308,11 @@ class Entries {
 		$this->lib->reset_no_results();
 		$this->lib->reset_tagdata();
 		
-		$this->lib->set_tagdata('{category_ids}');
+		$this->lib->set_tagdata('{entry_id} {category_ids}');
 		
 		$category = $this->_fetch_category_ids();
 		
+		$override['status']  = $this->param('status', 'open');
 		$override['disable'] = $this->param('disable', 'member_data|category_fields|pagination');
 		
 		if($category)
