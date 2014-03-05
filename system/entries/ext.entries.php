@@ -42,11 +42,9 @@ class Entries_ext {
 				$cats[] = $cat[0];
 			}
 		}
-		
-		$row = array_merge($row, array(
-			'total_categories' => count($cats),
-			'category_ids'     => trim(implode('|', $cats))
-		));
+				
+		$row['total_categories'] = count($cats);
+		$row['category_ids']     = trim(implode('|', $cats));
 		
 		return $row;
 	}

@@ -231,6 +231,8 @@ class Entries {
 			'author_id' => $this->param('author_id', 'CURRENT_USER'),
 			'limit'     => $this->param('limit', 1),
 			'dynamic'   => $this->param('dynamic', 'no'),
+			'sort'   	=> $this->param('sort', 'asc'),
+			'orderby'  	=> $this->param('orderby', 'entry_id'),
 		), $override);
 		
 		$this->lib->set_params($params);
